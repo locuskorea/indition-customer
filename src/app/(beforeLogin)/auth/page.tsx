@@ -1,3 +1,5 @@
+import LoginPage from "./login/page";
+
 export default function AuthPage() {
-  return <div></div>;
+  return <LoginPage />;
 }
