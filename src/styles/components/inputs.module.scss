@@ -1,0 +1,63 @@
+@import "../variable.scss";
+.text_field {
+  outline: none;
+  &.small {
+    min-width: 240px;
+    min-height: 36px;
+    padding: 0 8px;
+    box-sizing: border-box;
+    &::placeholder {
+      @include body_medium;
+    }
+  }
+  &.standard {
+    border: 2px solid $border_neutral300A;
+    background-color: $white;
+    &:hover {
+      border: 2px solid $border_neutral300A;
+      background-color: $etc_hover;
+    }
+    &:focus {
+      border: 2px solid $border_focus;
+      background-color: $white;
+    }
+    &:disabled {
+      border: 2px solid $border_neutral300A;
+      background-color: $disabled;
+      color: $disabled_default;
+    }
+  }
+  &.subtle {
+    border: 2px solid transparent;
+    background-color: $white;
+    &:hover {
+      border: 2px solid $border_neutral300A;
+      background-color: $etc_hover;
+    }
+    &:focus {
+      border: 2px solid $border_focus;
+      background-color: $white;
+    }
+    &:disabled {
+      border: none;
+      background-color: $white;
+      color: $disabled_default;
+    }
+  }
+  &.none {
+    border: 2px solid transparent;
+    background-color: $white;
+
+    &:disabled {
+      border: none;
+      background-color: $white;
+      color: $disabled_default;
+    }
+  }
+  &.error {
+    border: 2px solid $border_red600 !important;
+  }
+}
+
+.checkbox {
+}

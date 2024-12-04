@@ -1,11 +1,217 @@
 $white: #ffffff;
 $black: #000000;
-$primary_a: #000000;
-$primary_b: #ffffff;
-$accent: #266ef1;
-$negative: #de1135;
-$warning: #f6bc2f;
-$positive: #0e8345;
+$default: #172b4d;
+$disabled_default: #091e424f;
+$border_neutral300A: #091e4224;
+$border_red600: #e2483d;
+//
+$etc_enable: #ffffff;
+$etc_hover: #f7f8f9;
+$etc_pressed: #091e424f;
+//
+$btn_enable: #091e420f;
+$btn_hover: #091e4224;
+$btn_pressed: #091e424f;
+//
+$btn_stop_enable: #ffffff;
+$btn_stop_hover: #091e420f;
+$btn_stop_pressed: #091e4224;
+//
+$banner_enable: #44546f;
+$banner_hover: #2c3e5d;
+$banner_pressed: #172b4d;
+//
+$dropdown_enable: #e9f2ff;
+$dropdown_hover: #cce0ff;
+$dropdown_pressed: #85bbff;
+//
+$selected_enable: #0c66e4;
+$selected_hover: #0055cc;
+$selected_pressed: #09326c;
+//
+$subtlest_neutral_enable: #f1f2f4;
+$subtlest_neutral_hover: #dcdfe4;
+$subtlest_neutral_pressed: #b3b9c4;
+//
+$subtlest_lime_enable: #efffd6;
+$subtlest_lime_hover: #d3f1a7;
+$subtlest_lime_pressed: #b3df72;
+//
+$subtlest_red_enable: #ffeceb;
+$subtlest_red_hover: #ffd5d2;
+$subtlest_red_pressed: #fd9891;
+//
+$subtlest_orange_enable: #fff3eb;
+$subtlest_orange_hover: #fedec8;
+$subtlest_orange_pressed: #fec195;
+//
+$subtlest_yellow_enable: #fff7d6;
+$subtlest_yellow_hover: #f8e6a0;
+$subtlest_yellow_pressed: #f5cd47;
+//
+$subtlest_green_enable: #dcfff1;
+$subtlest_green_hover: #baf3db;
+$subtlest_green_pressed: #7ee2b8;
+//
+$subtlest_teal_enable: #e7f9ff;
+$subtlest_teal_hover: #c6edfb;
+$subtlest_teal_pressed: #9dd9ee;
+//
+$subtlest_blue_enable: #e9f2ff;
+$subtlest_blue_hover: #cce0ff;
+$subtlest_blue_pressed: #85b8ff;
+//
+$subtlest_purple_enable: #f3f0ff;
+$subtlest_purple_hover: #dfd8fd;
+$subtlest_purple_pressed: #b8acf6;
+//
+$subtlest_magenta_enable: #ffecf8;
+$subtlest_magenta_hover: #fdd0ec;
+$subtlest_magenta_pressed: #f797d2;
+//
+$subtler_neutral_enable: #dcdfe4;
+$subtler_neutral_hover: #b3b9c4;
+$subtler_neutral_pressed: #8590a2;
+//
+$subtler_lime_enable: #d3f1a7;
+$subtler_lime_hover: #b3df72;
+$subtler_lime_pressed: #94c748;
+//
+$subtler_red_enable: #ffd5d2;
+$subtler_red_hover: #fd9891;
+$subtler_red_pressed: #f87168;
+//
+$subtler_orange_enable: #fedec8;
+$subtler_orange_hover: #fec195;
+$subtler_orange_pressed: #fea362;
+//
+$subtler_yellow_enable: #f8e6a0;
+$subtler_yellow_hover: #f5cd47;
+$subtler_yellow_pressed: #e2b203;
+//
+$subtler_green_enable: #baf3db;
+$subtler_green_hover: #7ee2b8;
+$subtler_green_pressed: #4bce97;
+//
+$subtler_teal_enable: #c6edfb;
+$subtler_teal_hover: #9dd9ee;
+$subtler_teal_pressed: #6cc3e0;
+//
+$subtler_blue_enable: #cce0ff;
+$subtler_blue_hover: #85b8ff;
+$subtler_blue_pressed: #579dff;
+//
+$subtler_purple_enable: #dfd8fd;
+$subtler_purple_hover: #b8acf6;
+$subtler_purple_pressed: #9f8fef;
+//
+$subtler_magenta_enable: #fdd0ec;
+$subtler_magenta_hover: #f797d2;
+$subtler_magenta_pressed: #e774bb;
+//
+$subtle_neutral_enable: #8590a2;
+$subtle_neutral_hover: #b3b9c4;
+$subtle_neutral_pressed: #dcdfe4;
+//
+$subtle_lime_enable: #94c748;
+$subtle_lime_hover: #b3df72;
+$subtle_lime_pressed: #d3f1a7;
+//
+$subtle_red_enable: #f87168;
+$subtle_red_hover: #fd9891;
+$subtle_red_pressed: #ffd5d2;
+//
+$subtle_orange_enable: #fea362;
+$subtle_orange_hover: #fec195;
+$subtle_orange_pressed: #fedec8;
+//
+$subtle_yellow_enable: #f5cd47;
+$subtle_yellow_hover: #e2b203;
+$subtle_yellow_pressed: #cf9f02;
+//
+$subtle_green_enable: #4bce97;
+$subtle_green_hover: #7ee2b8;
+$subtle_green_pressed: #baf3db;
+//
+$subtle_teal_enable: #6cc3e0;
+$subtle_teal_hover: #9dd9ee;
+$subtle_teal_pressed: #c6edfb;
+//
+$subtle_blue_enable: #579dff;
+$subtle_blue_hover: #85b8ff;
+$subtle_blue_pressed: #cce0ff;
+//
+$subtle_purple_enable: #9f8fef;
+$subtle_purple_hover: #b8acf6;
+$subtle_purple_pressed: #dfd8fd;
+//
+$subtle_magenta_enable: #e774bb;
+$subtle_magenta_hover: #f797d2;
+$subtle_magenta_pressed: #fdd0ec;
+//
+$bolder_neutral_enable: #626f86;
+$bolder_neutral_hover: #44546f;
+$bolder_neutral_pressed: #2c3e5d;
+//
+$bolder_lime_enable: #5b7f24;
+$bolder_lime_hover: #4c6b1f;
+$bolder_lime_pressed: #37471f;
+//
+$bolder_red_enable: #c9372c;
+$bolder_red_hover: #ae2e24;
+$bolder_red_pressed: #5d1f1a;
+//
+$bolder_orange_enable: #c25100;
+$bolder_orange_hover: #a54800;
+$bolder_orange_pressed: #702e00;
+//
+$bolder_yellow_enable: #946f00;
+$bolder_yellow_hover: #7f5f01;
+$bolder_yellow_pressed: #533f04;
+//
+$bolder_green_enable: #1f845a;
+$bolder_green_hover: #216e4e;
+$bolder_green_pressed: #164b35;
+//
+$bolder_teal_enable: #227d9b;
+$bolder_teal_hover: #206a83;
+$bolder_teal_pressed: #164555;
+//
+$bolder_blue_enable: #0c66e4;
+$bolder_blue_hover: #0055cc;
+$bolder_blue_pressed: #09326c;
+//
+$bolder_purple_enable: #6e5dc6;
+$bolder_purple_hover: #5e4db2;
+$bolder_purple_pressed: #352c63;
+//
+$bolder_magenta_enable: #ae4787;
+$bolder_magenta_hover: #943d73;
+$bolder_magenta_pressed: #50253f;
+//
+$disabled_enable: #091e4208;
+$disabled_hover: #091e4208;
+$disabled_pressed: #091e4208;
+//
+$link_hover_enable: #0c66e4;
+$link_hover_hover: #0055cc;
+$link_hover_pressed: #0055cc;
+//
+$history_hover_enable: #5e4db2;
+$history_hover_hover: #352c63;
+$history_hover_pressed: #352c63;
+//
+$border_focus: #388bff;
+//
+$negative: #ae2e24;
+$warning: #a54800;
+$inverse: #172b4d;
+$success: #216e4e;
+$new: #5e4db2;
+$process: #0055cc;
+$subtlest: #626f86;
+$subtle: #44546f;
+$disabled: #091e4208;
 //
 $red1000: #42221f;
 $red900: #5d1f1a;

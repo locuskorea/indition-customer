@@ -1,0 +1,198 @@
+@import "../variable.scss";
+
+.buttons {
+  border: none;
+  background-color: transparent;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  border-radius: 4px;
+  transition-duration: 0.5s;
+  &:disabled {
+    background-color: $disabled !important;
+    color: $disabled_default !important;
+  }
+  &.small {
+    min-width: 66px;
+    min-height: 32px;
+
+    > span {
+      @include body_medium;
+    }
+  }
+  &.small.no_text {
+    min-width: 32px;
+    min-height: 32px;
+  }
+  &.medium {
+  }
+  &.large {
+  }
+  &.primary {
+    background-color: $bolder_blue_enable;
+    color: $white;
+    &:hover {
+      background-color: $bolder_blue_hover;
+    }
+    &:active {
+      background-color: $bolder_blue_pressed;
+    }
+    &:focus {
+      outline: 2px solid $border_focus;
+      border: 2px solid $white;
+      background-color: $bolder_blue_enable;
+    }
+    // &:enabled {
+    //   background-color: $blue100;
+    //   outline: none;
+    //   border: none;
+    //   span {
+    //     @include body_medium;
+    //     color: $blue700;
+    //   }
+    // }
+  }
+  &.warning {
+    background-color: $subtle_yellow_enable;
+    color: $default;
+    &:hover {
+      background-color: $subtle_yellow_hover;
+    }
+    &:active {
+      background-color: $subtle_yellow_pressed;
+    }
+    &:focus {
+      outline: 1px solid $border_focus;
+      border: 2px solid $white;
+      background-color: $subtle_yellow_enable;
+    }
+    // &:enabled {
+    //   background-color: $blue100;
+    //   outline: none;
+    //   border: none;
+    //   span {
+    //     @include body_medium;
+    //     color: $blue700;
+    //   }
+    // }
+  }
+  &.danger {
+    background-color: $bolder_red_enable;
+    color: $white;
+    &:hover {
+      background-color: $bolder_red_hover;
+    }
+    &:active {
+      background-color: $bolder_red_pressed;
+    }
+    &:focus {
+      outline: 1px solid $border_focus;
+      border: 2px solid $white;
+    }
+    // &:enabled {
+    //   background-color: $blue100;
+    //   outline: none;
+    //   border: none;
+    //   span {
+    //     @include body_medium;
+    //     color: $blue700;
+    //   }
+    // }
+  }
+  &.default {
+    background-color: $btn_enable;
+    color: $default;
+    &:hover {
+      background-color: $btn_hover;
+    }
+    &:active {
+      background-color: $btn_pressed;
+    }
+    &:focus {
+      outline: 2px solid $border_focus;
+      border: 2px solid $white;
+    }
+    // &:enabled {
+    //   background-color: $blue100;
+    //   outline: none;
+    //   border: none;
+    //   span {
+    //     @include body_medium;
+    //     color: $blue700;
+    //   }
+    // }
+  }
+  &.subtle {
+    background-color: $white;
+    color: $default;
+    &:hover {
+      background-color: $btn_stop_hover;
+    }
+    &:active {
+      background-color: $btn_stop_pressed;
+    }
+    &:focus {
+      outline: 2px solid $border_focus;
+      border: 2px solid $white;
+      background-color: $white;
+    }
+    // &:enabled {
+    //   background-color: $blue100;
+    //   outline: none;
+    //   border: none;
+    //   span {
+    //     @include body_medium;
+    //     color: $blue700;
+    //   }
+    // }
+  }
+  &.link {
+    background-color: $white;
+    color: $border_focus;
+    &:hover {
+      text-decoration: underline;
+    }
+    &:active {
+      text-decoration: underline;
+    }
+    &:focus {
+      outline: 1px solid $border_focus;
+      border: 2px solid $white;
+      background-color: $white;
+    }
+    // &:enabled {
+    //   background-color: $blue100;
+    //   outline: none;
+    //   border: none;
+    //   span {
+    //     @include body_medium;
+    //     color: $blue700;
+    //   }
+    // }
+  }
+  &.subtle_link {
+    background-color: $white;
+    color: $subtlest;
+    &:hover {
+      text-decoration: underline;
+    }
+    &:active {
+      text-decoration: underline;
+    }
+    &:focus {
+      outline: 1px solid $border_focus;
+      border: 2px solid $white;
+      background-color: $white;
+    }
+    // &:enabled {
+    //   background-color: $blue100;
+    //   outline: none;
+    //   border: none;
+    //   span {
+    //     @include body_medium;
+    //     color: $blue700;
+    //   }
+    // }
+  }
+}
