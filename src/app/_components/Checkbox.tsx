@@ -1,11 +1,11 @@
 "use client";
-import React, { ChangeEventHandler, DetailedHTMLProps, InputHTMLAttributes, SetStateAction } from "react";
+
 import styles from "@/styles/components/inputs.module.scss";
 type Props = {
   size: string;
   state: string;
   text?: string;
-  onChange: any;
+  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   properties: {
     id: string;
     checked: boolean;
@@ -15,8 +15,10 @@ type Props = {
 export default function Checkbox({ text, size, state, properties, onChange }: Props) {
   return (
     <div className={`${styles.checkbox} ${styles[size]} ${styles[state]}`}>
-      <label htmlFor={""}>{text}</label>
-      <input type="checkbox" properties={{ ...properties }} onChange={onChange} />
+      <input type="checkbox" id={properties.id} disabled={properties.disabled} checked={properties.checked} onChange={onChange} />
+      <label htmlFor={properties.id} className={`${styles[size]} ${styles[state]}`}>
+        {text}
+      </label>
     </div>
   );
 }

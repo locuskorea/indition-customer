@@ -196,3 +196,31 @@
     // }
   }
 }
+
+.tag {
+  min-height: 20px;
+  padding: 0 2px 0 4px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  border: none;
+  column-gap: 4px;
+  background-color: $btn_enable;
+  &:hover {
+    background-color: $btn_hover;
+  }
+  &:active {
+    background-color: $btn_pressed;
+  }
+  &.square {
+    border-radius: 2px;
+  }
+  &.round {
+    border-radius: 19px;
+  }
+  > span {
+    @include body_medium;
+  }
+}

@@ -1,20 +1,254 @@
 @import "../variable.scss";
-.text_field {
-  outline: none;
-  &.small {
-    min-width: 240px;
-    min-height: 36px;
-    padding: 0 8px;
-    box-sizing: border-box;
-    &::placeholder {
-      @include body_medium;
+.text_input_root {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  position: relative;
+  > img {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    left: 12px;
+  }
+  > div {
+    position: absolute;
+    right: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    > img {
+      cursor: pointer;
     }
   }
-  &.standard {
-    border: 2px solid $border_neutral300A;
-    background-color: $white;
-    &:hover {
+  > .text_input {
+    outline: none;
+    &.small {
+      min-width: 240px;
+      min-height: 40px;
+      padding: 0 8px;
+      box-sizing: border-box;
+      &::placeholder {
+        @include body_medium;
+      }
+      &.is_image {
+        padding-left: 42px;
+      }
+    }
+    &.standard {
       border: 2px solid $border_neutral300A;
+      background-color: $white;
+      &:hover {
+        border: 2px solid $border_neutral300A;
+        background-color: $etc_hover;
+      }
+      &:focus {
+        border: 2px solid $border_focus;
+        background-color: $white;
+      }
+      &:disabled {
+        border: 2px solid $border_neutral300A;
+        background-color: $disabled;
+        color: $disabled_default;
+      }
+    }
+    &.subtle {
+      border: 2px solid transparent;
+      background-color: $white;
+      &:hover {
+        border: 2px solid $border_neutral300A;
+        background-color: $etc_hover;
+      }
+      &:focus {
+        border: 2px solid $border_focus;
+        background-color: $white;
+      }
+      &:disabled {
+        border: none;
+        background-color: $white;
+        color: $disabled_default;
+      }
+    }
+    &.none {
+      border: 2px solid transparent;
+      background-color: $white;
+
+      &:disabled {
+        border: none;
+        background-color: $white;
+        color: $disabled_default;
+      }
+    }
+    &.error {
+      border: 2px solid $border_red600 !important;
+    }
+  }
+}
+
+.checkbox {
+  width: 100%;
+  height: 100%;
+  min-width: fit-content;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  > input {
+    display: none;
+  }
+  > input[type="checkbox"] + label {
+    cursor: pointer;
+    width: 100%;
+    height: 100%;
+    background-position: left center;
+    background-repeat: no-repeat;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    @include body_medium;
+    &.enable {
+      background-image: url("/icons/checkbox/checkbox_enable.svg");
+      &:hover {
+        background-image: url("/icons/checkbox/checkbox_enable_hover.svg");
+      }
+    }
+    &.error {
+      background-image: url("/icons/checkbox/checkbox_error.svg");
+      &:hover {
+        background-image: url("/icons/checkbox/checkbox_error_hover.svg");
+      }
+    }
+    // &:focus {
+    //   background-image: url("/icons/checkbox/checkbox_focus.svg");
+    //   &:hover {
+    //     background-image: url("/icons/checkbox/checkbox_focus_hover.svg");
+    //   }
+    // }
+    &.small {
+      background-size: 16px;
+      padding-left: 20px;
+    }
+    &.medium {
+      background-size: 24px;
+      padding-left: 24px;
+    }
+    &.large {
+      background-size: 32px;
+      padding-left: 36px;
+    }
+  }
+  > input[type="checkbox"]:disabled + label {
+    background-image: url("/icons/checkbox/checkbox_disabled.svg") !important;
+    color: $disabled_default;
+  }
+  > input[type="checkbox"]:disabled:checked + label {
+    background-image: url("/icons/checkbox/checkbox_disabled_checked.svg") !important;
+    color: $disabled_default;
+  }
+  > input[type="checkbox"]:checked + label {
+    &.enable {
+      background-image: url(/icons/checkbox/checkbox_enable_checked.svg);
+      &:hover {
+        background-image: url("/icons/checkbox/checkbox_enable_checked_hover.svg");
+      }
+    }
+    &.error {
+      background-image: url("/icons/checkbox/checkbox_error_checked.svg");
+      &:hover {
+        background-image: url("/icons/checkbox/checkbox_error_checked_hover.svg");
+      }
+    }
+    // &:focus {
+    //   background-image: url("/icons/checkbox/checkbox_focus_checked.svg");
+    //   &:hover {
+    //     background-image: url("/icons/checkbox/checkbox_focus_checked_hover.svg");
+    //   }
+    // }
+  }
+}
+.radio_input {
+  min-width: fit-content;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  > input {
+    display: none;
+  }
+  > input[type="radio"] + label {
+    cursor: pointer;
+    background-position: left center;
+    background-repeat: no-repeat;
+    background-size: 24px;
+    padding-left: 28px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    @include body_medium;
+    background-image: url("/icons/radio/radio_enable.svg");
+    &:hover {
+      background-image: url("/icons/radio/radio_enable_hover.svg");
+    }
+  }
+  > input[type="radio"]:disabled + label {
+    background-image: url("/icons/radio/radio_disabled.svg") !important;
+    color: $disabled_default;
+  }
+  > input[type="radio"]:disabled:checked + label {
+    background-image: url("/icons/radio/radio_disabled_checked.svg") !important;
+    color: $disabled_default;
+  }
+  > input[type="radio"]:checked + label {
+    &.enable {
+      background-image: url("/icons/radio/radio_enable_checked.svg");
+      &:hover {
+        background-image: url("/icons/radio/radio_enable_checked.svg");
+      }
+    }
+    &.error {
+      background-image: url("/icons/radio/radio_error_checked.svg");
+      &:hover {
+        background-image: url("/icons/radio/radio_error_checked.svg");
+      }
+    }
+  }
+}
+
+.text_field {
+  min-width: 400px;
+  height: 160px;
+  min-height: 160px;
+  position: relative;
+  background-color: $white;
+  > textarea {
+    border: 2px solid $border_neutral300A;
+    padding: 12px 8px;
+    box-sizing: border-box;
+    cursor: pointer;
+    width: 100%;
+    min-width: 100%;
+    max-width: 100%;
+    height: 100%;
+    min-height: 160px;
+    outline: none;
+    z-index: 4;
+    background-color: transparent;
+    // -webkit-appearance: none;
+    background-image: url("/icons/resize.svg");
+    background-repeat: no-repeat;
+    background-position: right 8px bottom 12px;
+
+    &::-webkit-resizer {
+      border: 2px solid transparent;
+      outline: 2px solid transparent;
+    }
+
+    &:hover {
       background-color: $etc_hover;
     }
     &:focus {
@@ -27,37 +261,10 @@
       color: $disabled_default;
     }
   }
-  &.subtle {
-    border: 2px solid transparent;
-    background-color: $white;
-    &:hover {
-      border: 2px solid $border_neutral300A;
-      background-color: $etc_hover;
-    }
-    &:focus {
-      border: 2px solid $border_focus;
-      background-color: $white;
-    }
-    &:disabled {
-      border: none;
-      background-color: $white;
-      color: $disabled_default;
-    }
+  > .clear {
+    position: absolute;
+    cursor: pointer;
+    top: 12px;
+    right: 8px;
   }
-  &.none {
-    border: 2px solid transparent;
-    background-color: $white;
-
-    &:disabled {
-      border: none;
-      background-color: $white;
-      color: $disabled_default;
-    }
-  }
-  &.error {
-    border: 2px solid $border_red600 !important;
-  }
-}
-
-.checkbox {
 }

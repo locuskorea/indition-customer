@@ -1,19 +1,13 @@
-"use client";
-import { SetStateAction } from "react";
+import Image from "next/image";
 import styles from "@/styles/components/inputs.module.scss";
-type Props = {
-  size: string;
-  status?: string;
-  appearance: string;
-  inputProps: {
-    value: string | null;
-    name: string;
-    placeholder: string;
-    onChange: (e: React.ChangeEvent<HTMLInputElement>) => void | React.Dispatch<SetStateAction<string>> | null;
-    onKeyUp: (e: React.KeyboardEvent<HTMLInputElement>) => void | null;
-    disabled?: boolean;
-  };
-};
-export default function TextField({ size, appearance, status, inputProps }: Props) {
-  return <input className={`${styles.text_field} ${styles[size]} ${styles[appearance]} ${styles[status]}`} {...inputProps} autoComplete="off" />;
+import { useState } from "react";
+export default function TextField() {
+  const [isFocus, setIsFocus] = useState(false);
+  return (
+    <div className={styles.text_field}>
+      <textarea onFocus={() => setIsFocus(true)} onBlur={() => setIsFocus(false)} />
+      {isFocus && <Image src={`/icons/inputs/input_cancel.svg`} alt="" width={16} height={16} className={styles.clear} />}
+      {!isFocus && <Image src={`/icons/inputs/input_check_circle.svg`} alt="" width={16} height={16} className={styles.clear} />}
+    </div>
+  );
 }
