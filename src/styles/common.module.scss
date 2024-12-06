@@ -1,0 +1,31 @@
+@import "./variable.scss";
+.backdrop {
+  width: 100dvw;
+  height: 100dvh;
+  background-color: #00000066;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 999;
+  opacity: 0;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  &.transparent {
+    background-color: transparent;
+  }
+  &.right {
+    justify-content: flex-end;
+  }
+
+  &.open {
+    opacity: 1;
+    transition: opacity 0.3s ease-in;
+  }
+  &.close {
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease-in;
+  }
+}

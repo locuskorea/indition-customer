@@ -7,11 +7,26 @@
   flex-direction: row;
   align-items: center;
   justify-content: center;
+  column-gap: 6px;
   border-radius: 4px;
-  transition-duration: 0.5s;
+  transition: background 0.5s;
+  max-width: fit-content;
+  padding: 0 6px;
+  box-sizing: border-box;
   &:disabled {
     background-color: $disabled !important;
     color: $disabled_default !important;
+  }
+  &.has_images {
+    justify-content: space-between;
+  }
+  &.xsmall {
+    min-width: 54px;
+    min-height: 32px;
+
+    > span {
+      @include body_medium;
+    }
   }
   &.small {
     min-width: 66px;
@@ -26,8 +41,20 @@
     min-height: 32px;
   }
   &.medium {
+    min-width: 54px;
+    min-height: 40px;
+
+    > span {
+      @include body_medium;
+    }
   }
   &.large {
+    min-width: 54px;
+    min-height: 44px;
+
+    > span {
+      @include body_medium;
+    }
   }
   &.primary {
     background-color: $bolder_blue_enable;
@@ -35,13 +62,13 @@
     &:hover {
       background-color: $bolder_blue_hover;
     }
-    &:active {
-      background-color: $bolder_blue_pressed;
-    }
     &:focus {
       outline: 2px solid $border_focus;
       border: 2px solid $white;
       background-color: $bolder_blue_enable;
+    }
+    &:active {
+      background-color: $bolder_blue_pressed;
     }
     // &:enabled {
     //   background-color: $blue100;
@@ -59,13 +86,13 @@
     &:hover {
       background-color: $subtle_yellow_hover;
     }
-    &:active {
-      background-color: $subtle_yellow_pressed;
-    }
     &:focus {
       outline: 1px solid $border_focus;
       border: 2px solid $white;
       background-color: $subtle_yellow_enable;
+    }
+    &:active {
+      background-color: $subtle_yellow_pressed;
     }
     // &:enabled {
     //   background-color: $blue100;
@@ -106,12 +133,12 @@
     &:hover {
       background-color: $btn_hover;
     }
-    &:active {
-      background-color: $btn_pressed;
-    }
     &:focus {
       outline: 2px solid $border_focus;
       border: 2px solid $white;
+    }
+    &:active {
+      background-color: $btn_pressed;
     }
     // &:enabled {
     //   background-color: $blue100;
@@ -129,13 +156,13 @@
     &:hover {
       background-color: $btn_stop_hover;
     }
-    &:active {
-      background-color: $btn_stop_pressed;
-    }
     &:focus {
       outline: 2px solid $border_focus;
       border: 2px solid $white;
       background-color: $white;
+    }
+    &:active {
+      background-color: $btn_stop_pressed;
     }
     // &:enabled {
     //   background-color: $blue100;
@@ -153,13 +180,13 @@
     &:hover {
       text-decoration: underline;
     }
-    &:active {
-      text-decoration: underline;
-    }
     &:focus {
       outline: 1px solid $border_focus;
       border: 2px solid $white;
       background-color: $white;
+    }
+    &:active {
+      text-decoration: underline;
     }
     // &:enabled {
     //   background-color: $blue100;
@@ -177,13 +204,13 @@
     &:hover {
       text-decoration: underline;
     }
-    &:active {
-      text-decoration: underline;
-    }
     &:focus {
       outline: 1px solid $border_focus;
       border: 2px solid $white;
       background-color: $white;
+    }
+    &:active {
+      text-decoration: underline;
     }
     // &:enabled {
     //   background-color: $blue100;
@@ -222,5 +249,47 @@
   }
   > span {
     @include body_medium;
+  }
+}
+
+.tab {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  min-height: 32px;
+  height: 32px;
+  > button {
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    &.current {
+      border-bottom: 1.5px solid $border_focus;
+      > span {
+        color: $process;
+      }
+      &:hover {
+        border-bottom: 1.5px solid $border_focus;
+      }
+      &:active {
+        border-bottom: 1.5px solid $border_neutral300A;
+      }
+    }
+    &:hover {
+      border-bottom: 1.5px solid $border_neutral300A;
+    }
+    &:active {
+      > span {
+        color: $default;
+      }
+    }
+    > span {
+      @include body_medium;
+      color: $subtlest;
+    }
   }
 }

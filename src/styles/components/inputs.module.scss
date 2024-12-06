@@ -268,3 +268,217 @@
     right: 8px;
   }
 }
+
+.password_input {
+  min-width: 240px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  position: relative;
+  margin-top: 30px;
+  &.small {
+    min-height: 40px;
+    height: 40px;
+    > input {
+      @include body_medium;
+    }
+  }
+  &.medium {
+    min-height: 40px;
+    height: 48px;
+    > input {
+      @include body_medium;
+    }
+  }
+  &.large {
+    min-height: 40px;
+    height: 56px;
+    > input {
+      @include body_large;
+    }
+  }
+  > img {
+    position: absolute;
+    left: 8px;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+  > input {
+    width: 100%;
+    height: 100%;
+    outline: none;
+    &.small.image {
+      padding-left: 38px;
+    }
+    &.small.no_image {
+      padding-left: 8px;
+    }
+    &.medium.image,
+    &.large.image {
+      padding-left: 42px;
+    }
+    &.medium.no_image,
+    &.large.no_image {
+      padding-left: 12px;
+    }
+    &.standard {
+      border: 2px solid $border_neutral300A;
+
+      &:hover {
+        background-color: $etc_hover;
+        cursor: pointer;
+      }
+      &:focus {
+        background-color: $white;
+        border: 2px solid $border_focus;
+      }
+      &:disabled {
+        background-color: $disabled_enable;
+        border: 2px solid $border_neutral300A;
+        color: $disabled_default;
+        &::placeholder {
+          color: $disabled_default;
+        }
+      }
+    }
+    &.subtle {
+      border: none;
+
+      &:hover {
+        background-color: $etc_hover;
+        border: 2px solid $border_neutral300A;
+        cursor: pointer;
+      }
+      &:focus {
+        background-color: $white;
+        border: 2px solid $border_focus;
+      }
+      &:disabled {
+        border: none;
+        background-color: $white;
+        color: $disabled_default;
+        &::placeholder {
+          color: $disabled_default;
+        }
+      }
+    }
+    &.none {
+      border: none;
+
+      &:hover {
+        background-color: $white;
+        border: none;
+        cursor: pointer;
+      }
+      &:focus {
+        background-color: $white;
+        border: none;
+      }
+      &:disabled {
+        border: none !important;
+        background-color: $white;
+        color: $disabled_default;
+        &::placeholder {
+          color: $disabled_default;
+        }
+      }
+    }
+    &.error {
+      border: 2px solid $border_red600;
+    }
+  }
+  > div {
+    position: absolute;
+    right: 8px;
+    top: 50%;
+    transform: translateY(-50%);
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    column-gap: 6px;
+    > img {
+      cursor: pointer;
+    }
+  }
+}
+.filedrop_root {
+  max-width: fit-content;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  row-gap: 4px;
+  .filedrop {
+    min-width: 300px;
+    width: 300px;
+    height: 150px;
+    border-radius: 12px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    border: 2px dashed $border_neutral300A;
+    background-color: $subtlest_neutral_enable;
+    transition: "background-color 0.3s ease";
+    cursor: pointer;
+    &.active {
+      border: 2px dashed $border_focus;
+      background-color: $btn_dropdown;
+    }
+    > p {
+      @include body_medium;
+      color: $subtlest;
+    }
+    > div {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      row-gap: 10px;
+      > span {
+        > p {
+          @include body_medium;
+          color: $subtlest;
+        }
+      }
+      &.success {
+        > span {
+          display: flex;
+          flex-direction: row;
+          align-items: center;
+          justify-content: flex-start;
+          column-gap: 4px;
+          > p {
+            color: $default;
+          }
+        }
+      }
+      &.error {
+        > span {
+          display: flex;
+          flex-direction: row;
+          align-items: center;
+          justify-content: flex-start;
+          column-gap: 4px;
+          > p {
+            color: $default;
+          }
+        }
+      }
+    }
+  }
+  .notice {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    > span {
+      @include body_small;
+      color: $subtlest;
+    }
+  }
+}
