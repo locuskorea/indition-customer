@@ -1,16 +1,19 @@
 "use client";
 import styles from "@/styles/layout.module.scss";
-import { GetServerSideProps } from "next";
 import Image from "next/image";
-import { useEffect, useState } from "react";
+import { SetStateAction, useContext, useEffect, useLayoutEffect, useState } from "react";
 import SideNavigation from "./SideNavigation";
 import Link from "next/link";
-import { useParams, usePathname, useRouter, useSearchParams } from "next/navigation";
+import { usePathname } from "next/navigation";
+import AppContext from "@/app/ContextProvider";
 type Props = {
   toggleSidebar: (event?: React.MouseEvent<HTMLButtonElement>) => void;
-  isExpanded: boolean;
+  isSidebarTooltips?: string;
+  setIsSidebarTooltips?: React.Dispatch<SetStateAction<string>>;
+  onMouseoverTooltip: (e: React.MouseEvent<HTMLDivElement> | string) => void;
 };
-export default function LayoutSidebar({ toggleSidebar, isExpanded }) {
+export default function LayoutSidebar({ toggleSidebar, isSidebarTooltips, setIsSidebarTooltips, onMouseoverTooltip }: Props) {
+  const { sidebarState, setSidebarState } = useContext(AppContext);
   const path = usePathname();
   const sidebar = [
     {
@@ -58,7 +61,7 @@ export default function LayoutSidebar({ toggleSidebar, isExpanded }) {
       icon: "/icons/sidebar_return.svg",
       child: [
         { label: "반품 신청", href: "/return/apply?pageNo=1&pageCnt=20&status=&dateSearchType=&startDate=&endDate=&searchText=" },
-        { label: "반품 처리 요청 내역", href: "/return/request?pageNo=1&pageCnt=20&status=&dateSearchType=&startDate=&endDate=&searchText=" },
+        { label: "반품 처리 요청 내역", href: "/return/process?pageNo=1&pageCnt=20&status=&dateSearchType=&startDate=&endDate=&searchText=" },
         { label: "반품 조회", href: "/return/list?pageNo=1&pageCnt=20&status=&dateSearchType=&startDate=&endDate=&searchText=" },
       ],
     },
@@ -82,68 +85,113 @@ export default function LayoutSidebar({ toggleSidebar, isExpanded }) {
       href: `/store/setting?type=브랜드정보&brand=`,
     },
   ];
-  const [isSidebarTooltips, setIsSidebarTooltips] = useState(null);
-  const onMouseoverTooltip = (type) => {
-    setIsSidebarTooltips(type);
+  console.log(sidebarState, "sidebarState");
+  const onClickSidebar = (kind) => {
+    if (sidebarState.isExpand) {
+      switch (kind) {
+        case "INCOMING": {
+          if (sidebarState.incomingSidebar) {
+            setSidebarState({ ...sidebarState, incomingSidebar: false });
+          } else {
+            setSidebarState({ ...sidebarState, incomingSidebar: true });
+          }
+          break;
+        }
+        case "STOCK": {
+          if (sidebarState.stockSidebar) {
+            setSidebarState({ ...sidebarState, stockSidebar: false });
+          } else {
+            setSidebarState({ ...sidebarState, stockSidebar: true });
+          }
+          break;
+        }
+        case "OUTGOING": {
+          if (sidebarState.outgoingSidebar) {
+            setSidebarState({ ...sidebarState, outgoingSidebar: false });
+          } else {
+            setSidebarState({ ...sidebarState, outgoingSidebar: true });
+          }
+          break;
+        }
+        case "RETURN": {
+          if (sidebarState.returnSidebar) {
+            setSidebarState({ ...sidebarState, returnSidebar: false });
+          } else {
+            setSidebarState({ ...sidebarState, returnSidebar: true });
+          }
+          break;
+        }
+        case "ACCOUNT": {
+          if (sidebarState.accountSidebar) {
+            setSidebarState({ ...sidebarState, accountSidebar: false });
+          } else {
+            setSidebarState({ ...sidebarState, accountSidebar: true });
+          }
+          break;
+        }
+        default: {
+          break;
+        }
+      }
+    }
   };
-  const onClickSidebar = (kind) => {};
-  console.log(path);
+
   return (
-    <div className={`${styles.sidebar_root} ${isExpanded ? styles.expand : styles.shrink}`}>
+    <div className={`${styles.sidebar_root} ${sidebarState.isExpand ? styles.expand : styles.shrink}`}>
       <div className={styles.menu}>
         <span>MENU</span>
         {sidebar.map((el) => {
           if (el.child.length == 0) {
             return (
               <div className={`${styles.parent_menu}`} onMouseOver={() => onMouseoverTooltip(el.id)} key={`${el.id}`}>
-                {isExpanded ? (
+                {sidebarState.isExpand ? (
                   <Link href={el.href}>
-                    <SideNavigation icon={el.icon} label={el.label} current={path.startsWith(el.href)} isSidebarTooltips={isSidebarTooltips == el.id} sidebarData={sidebar} mouseover={onMouseoverTooltip} isExpanded={isExpanded} />
+                    <SideNavigation icon={el.icon} label={el.label} current={path.startsWith(el.href)} isSidebarTooltips={isSidebarTooltips == el.id} sidebarData={sidebar} mouseover={onMouseoverTooltip} isExpand={sidebarState.isExpand} />
                   </Link>
                 ) : (
-                  <SideNavigation icon={el.icon} label={el.label} current={path.startsWith(el.href)} isSidebarTooltips={isSidebarTooltips == el.id} sidebarData={sidebar} mouseover={onMouseoverTooltip} isExpanded={isExpanded} />
+                  <SideNavigation icon={el.icon} label={el.label} current={path.startsWith(el.href)} isSidebarTooltips={isSidebarTooltips == el.id} sidebarData={sidebar} mouseover={onMouseoverTooltip} isExpand={sidebarState.isExpand} />
                 )}
               </div>
             );
           } else {
             return (
-              <div className={styles.parent_menu} onMouseOver={() => onMouseoverTooltip(el.label)}>
+              <div className={styles.parent_menu} onMouseOver={() => onMouseoverTooltip(el.label)} key={`${el.id}`} id={el.id}>
                 <SideNavigation
                   icon={el.icon}
                   label={el.label}
-                  current={!isExpanded ? path.startsWith(`/${el.id}`) : null}
+                  current={!sidebarState.isExpand ? path.startsWith(`/${el.id}`) : null}
                   isSidebarTooltips={isSidebarTooltips == el.label}
                   type="parent"
-                  arrow={isExpanded}
+                  arrow={sidebarState.isExpand}
                   onclick={() => onClickSidebar(el.id.toUpperCase())}
-                  // isExpandMenu={state[`${el.id}Sidebar`]}
+                  isExpandMenu={sidebarState[`${el.id}Sidebar`]}
                   sidebarData={sidebar}
-                  mouseover={onMouseoverTooltip}
-                  isExpanded={isExpanded}
+                  // mouseover={onMouseoverTooltip}
+                  isExpand={sidebarState.isExpand}
                 />
                 <>
-                  {/* {isExpand && state[`${el.id}Sidebar`] && ( */}
-                  <div className={`${styles.children_menu}  ${styles[el.id]}`}>
-                    {el.child.map((d, idx) => (
-                      <Link href={d.href} key={`d.label_${idx}`}>
-                        <SideNavigation label={d.label} current={path.startsWith(d.href.split("?")[0])} type="child" mouseover={onMouseoverTooltip} isExpanded={isExpanded} />
-                      </Link>
-                    ))}
-                  </div>
-                  {/* // )} */}
+                  {sidebarState.isExpand && sidebarState[`${el.id}Sidebar`] && (
+                    <div className={`${styles.children_menu} ${sidebarState.isExpand && sidebarState[`${el.id}Sidebar`] ? styles.show : styles.hide} ${styles[el.id]}`}>
+                      {el.child.map((d, idx) => (
+                        <Link href={d.href} key={`d.label_${idx}`}>
+                          <SideNavigation label={d.label} current={path.startsWith(d.href.split("?")[0])} type="child" mouseover={onMouseoverTooltip} isExpand={sidebarState.isExpand} />
+                        </Link>
+                      ))}
+                    </div>
+                  )}
                 </>
               </div>
             );
           }
         })}
       </div>
-      <div className={`${styles.logout} ${!isExpanded && styles.shrink}`}>
+      <div className={`${styles.logout} ${!sidebarState.isExpand && styles.shrink}`}>
         <button onClick={null}>
           <img src="/icons/logout.svg" alt="" loading="lazy" />
-          {isExpanded && <p>로그아웃</p>}
+          {sidebarState.isExpand && <p>로그아웃</p>}
         </button>
         <button onClick={toggleSidebar}>
-          <Image src="/icons/circle_arrow_left_gray.svg" alt="" className={isExpanded ? styles.expand : styles.shrink} width={30} height={30} />
+          <Image src="/icons/circle_arrow_left_gray.svg" alt="" className={sidebarState.isExpand ? styles.expand : styles.shrink} width={30} height={30} />
         </button>
       </div>
     </div>

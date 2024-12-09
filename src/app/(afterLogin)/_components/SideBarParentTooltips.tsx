@@ -11,11 +11,9 @@ const SidebarParentTooltips = ({ label, sidebarData, mouseover }) => {
           {sidebarData
             .filter((el) => el.child.length > 0)
             .find((el) => el.label == label)
-            .child.map((d) => (
-              <Link href={d.href}>
-                <a>
-                  <span>{d.label}</span>
-                </a>
+            .child.map((d, idx) => (
+              <Link href={d.href} key={`parent_tooltip_${idx}`}>
+                <span>{d.label}</span>
               </Link>
             ))}
         </div>

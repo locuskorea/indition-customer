@@ -1,13 +1,13 @@
 import styles from "@/styles/layout.module.scss";
 import { useRouter } from "next/navigation";
 type Props = {
-  isExpanded: boolean;
+  isExpand: boolean;
 };
-export default function Header({ isExpanded }) {
+export default function Header({ isExpand }: Props) {
   const router = useRouter();
   return (
     <div className={styles.header_root}>
-      <button className={`${styles.brand_info} ${!isExpanded ? styles.shrink : styles.expand}`} onClick={() => router.push(`/dashboard`)}>
+      <button className={`${styles.brand_info} ${!isExpand ? styles.shrink : styles.expand}`} onClick={() => router.push(`/dashboard`)}>
         ???
         {/* {isExpanded && <p>{userPermission?.brand ? userPermission?.brand : userInfo?.name}</p>} */}
       </button>

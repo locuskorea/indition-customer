@@ -1,36 +1,43 @@
 "use client";
-import { ReactNode, useEffect, useState } from "react";
+import { ReactNode, useContext, useEffect, useState } from "react";
 import styles from "@/styles/layout.module.scss";
 import LayoutSidebar from "./_components/Sidebar";
 import { GetServerSideProps } from "next";
 import Header from "./_components/Header";
+import AppContext from "../ContextProvider";
 type Props = {
   children: ReactNode;
   modal: ReactNode;
-  initialExpanded: ReactNode;
 };
 
-export default function AfterLoginLayout({ children, initialExpanded }: Props) {
-  const [isExpanded, setIsExpanded] = useState(initialExpanded);
+export default function AfterLoginLayout({ children }: Props) {
+  const { sidebarState, setSidebarState } = useContext(AppContext);
 
   useEffect(() => {
-    const savedState = localStorage.getItem("sidebarExpanded");
+    const savedState = localStorage.getItem("sidebarExpand");
     if (savedState !== null) {
-      setIsExpanded(JSON.parse(savedState));
+      console.log(sidebarState.isExpand, "sidebarState", localStorage.getItem("sidebarExpand"));
+      setSidebarState({ ...sidebarState, isExpand: JSON.parse(savedState) });
     }
   }, []);
 
   const toggleSidebar = () => {
-    const newState = !isExpanded;
-    setIsExpanded(newState);
-    localStorage.setItem("sidebarExpanded", JSON.stringify(newState));
+    const newState = !sidebarState.isExpand;
+    setSidebarState({ ...sidebarState, isExpand: newState });
+    localStorage.setItem("sidebarExpand", JSON.stringify(newState));
+  };
+  const [isSidebarTooltips, setIsSidebarTooltips] = useState(null);
+  const onMouseoverTooltip = (type) => {
+    setIsSidebarTooltips(type);
   };
   return (
     <div className={styles.after_login_layout}>
-      <Header isExpanded={isExpanded} />
+      <Header isExpand={sidebarState.isExpand} />
       <div className={styles.body}>
-        <LayoutSidebar toggleSidebar={toggleSidebar} isExpanded={isExpanded} />
-        <div>{children}</div>
+        <LayoutSidebar toggleSidebar={toggleSidebar} isSidebarTooltips={isSidebarTooltips} setIsSidebarTooltips={setIsSidebarTooltips} onMouseoverTooltip={onMouseoverTooltip} />
+        <div onMouseOver={() => onMouseoverTooltip(null)} className={styles.children_root}>
+          {children}
+        </div>
       </div>
     </div>
   );
