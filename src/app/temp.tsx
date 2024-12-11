@@ -73,6 +73,7 @@ export default function LoginPage() {
       <Tab menu={["tab1", "tab2"]} />
       <Filedrop />
       <Flag img={`/icons/photo.svg`} title={"타이틀을 작성해주세요"} des={"이곳은 유저에게 추가 정보를 전달하기 위해 작성하는 설명란입니다"} type={"normal"} />
+      {/* <Datepicker selectedDates={selectedDates} setSelectedDates={setSelectedDates} label={"label"} message={"message"} /> */}
     </div>
   );
 }
