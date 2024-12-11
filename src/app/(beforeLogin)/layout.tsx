@@ -9,7 +9,6 @@ type Props = {
 export default function BeforeLoginLayout({ children }: Props) {
   return (
     <div className={styles.before_login_layout}>
-      <div>sidebar</div>
       <div>{children}</div>
     </div>
   );

@@ -1,78 +1,61 @@
 "use client";
+
 import Buttons from "@/app/_components/Buttons";
-import Checkbox from "@/app/_components/Checkbox";
-import CustomSelect from "@/app/_components/CustomSelect";
-import Loading from "@/app/_components/Spinner";
-import RadioInput from "@/app/_components/RadioInput";
-import Tag from "@/app/_components/Tag";
+import PasswordInput from "@/app/_components/PasswordInput";
 import TextInput from "@/app/_components/TextInput";
-import TextField from "@/app/_components/TextField";
+import regCheck from "@/app/_functions/reg";
 import useInputs from "@/app/_hooks/useInputs";
 import styles from "@/styles/auth.module.scss";
-import { useState } from "react";
-import PasswordInput from "@/app/_components/PasswordInput";
-import Tooltip from "@/app/_components/Tooltip";
-import Snackbar from "@/app/_components/Snackbar";
-import Tab from "@/app/_components/Tab";
-import Filedrop from "@/app/_components/Filedrop";
-import instance from "@/app/_functions/axiosInstance";
-import { useQuery } from "@tanstack/react-query";
-import Flag from "@/app/_components/Flag";
-const fetchData = async () => {
-  const { data } = await instance.get("https://jsonplaceholder.typicode.com/posts");
-  return data;
-};
-export default function LoginPage() {
-  const { data, isLoading, error } = useQuery({
-    queryKey: ["queryKey"],
-    queryFn: fetchData,
-  });
-  const [valueObj, onChangeValueObj, resetValueObj] = useInputs({ id: "", name: "", email: "" });
-  const [value, setValue] = useState("");
-  const [isChecked, setIsChecked] = useState(false);
-  console.log("data:", data, "isLoading:", isLoading, "error:", error);
-  const [selectStates, setSelectStates] = useState({
-    select1: { isOpen: false, selectedOption: "", type: "radio" },
-    select2: { isOpen: false, selectedOption: "", type: "checkbox" },
-    select3: { isOpen: false, selectedOption: "", type: "default" },
-  });
-  const onChange = (e) => {
-    setValue(e.target.value);
-  };
-  const onChangeCheckbox = () => {
-    setIsChecked(!isChecked);
-  };
-  const optionsData = [
-    { label: "라벨1", id: 1 },
-    { label: "라벨2", id: 2 },
-  ];
+import Link from "next/link";
+import LogoHeader from "../_component/LogoHeader";
+import Description from "../_component/Description";
 
-  console.log(selectStates);
+export default function LoginPage() {
+  const [valueObj, onChangeValueObj, resetValueObj] = useInputs({ email: "", password: "" });
+  const onClickLoginReqeust = () => {};
 
   return (
-    <div className={styles.login_root} style={{ display: "flex", flexDirection: "column", padding: 100 }}>
-      로그인 페이지
-      {/* <TextInput size="small" img1="/icons/photo.svg" img2="/icons/photo.svg" inputProps={{ value: valueObj, name: "name", placeholder: "HI", onChange: onChangeValueObj, onKeyUp: null }} appearance="standard" resetFunc={resetValueObj} />
-      <TextInput size="small" img1="/icons/photo.svg" img2="/icons/photo.svg" inputProps={{ value: valueObj, name: "id", placeholder: "HI", onChange: onChangeValueObj, onKeyUp: null }} appearance="standard" resetFunc={resetValueObj} />
-      <TextInput size="small" img1="/icons/photo.svg" img2="/icons/photo.svg" inputProps={{ value: valueObj, name: "email", placeholder: "HI", onChange: onChangeValueObj, onKeyUp: null }} appearance="standard" resetFunc={resetValueObj} /> */}
-      {/* <Checkbox size="large" text="라벨" state="enable" properties={{ checked: isChecked, id: "id" }} onChange={onChangeCheckbox} /> */}
-      {/* <RadioInput text="라벨" state="error" properties={{ checked: isChecked, id: "id", name: "radio" }} onChange={onChangeCheckbox} /> */}
-      {/* <CustomSelect options={optionsData} selectStates={selectStates} setSelectStates={setSelectStates} /> */}
-      {/* <SelectOptions optionsData={optionsData} optionsType="default" isOpen={true} setValue={setValue} value={value} /> */}
-      {/* <Tag label={"태그"} img={""} isClose type="round" onClick={() => console.log("??")} /> */}
-      {/* <TextField inputProps={{ value: valueObj, name: "email", onChange: onChangeValueObj }} resetFunc={resetValueObj} /> */}
-      {/* <PasswordInput size="medium" img2={"/icons/photo.svg"} appreance={"error"} inputProps={{ value: valueObj, name: "password", onChange: onChangeValueObj, placeholder: "placeholder" }} resetFunc={resetValueObj} onKeyUp={null} /> */}
-      {/* <Tooltip text="HELLO HELLO HELLO HELLO HELLO" position="right" arrow={true}>
-        <span>HI</span>
-      </Tooltip> */}
-      <Buttons color="primary" img1={`/icons/photo.svg`} img2={`/icons/photo.svg`} size="large" text="button" />
-      <Buttons color="primary" img1={`/icons/photo.svg`} size="large" text="button" />
-      <Buttons color="primary" img2={`/icons/photo.svg`} size="large" text="button" />
-      <Buttons color="primary" size="large" text="button" />
-      <Snackbar text={"description"} buttonLabel={"button"} isButton isLoading />
-      <Tab menu={["tab1", "tab2"]} />
-      <Filedrop />
-      <Flag img={`/icons/photo.svg`} title={"타이틀을 작성해주세요"} des={"이곳은 유저에게 추가 정보를 전달하기 위해 작성하는 설명란입니다"} type={"normal"} />
+    <div className={styles.login_root}>
+      <div className={styles.left}></div>
+      <div className={styles.right}>
+        <LogoHeader />
+        <div className={styles.form_area}>
+          <Description
+            title={`스마트한 물류,
+인디션과 오늘도 함께해요`}
+            description={`로그인을 위해 이메일 주소와 비밀번호를 입력해 주세요`}
+          />
+
+          <div className={styles.input_area}>
+            <TextInput
+              size="medium"
+              isError={!regCheck("email", valueObj.email)}
+              appearance="standard"
+              inputProps={{ value: valueObj, name: "email", onChange: onChangeValueObj, placeholder: "이메일 입력", onKeyUp: null }}
+              resetFunc={resetValueObj}
+              style={{ width: 375 }}
+            />
+            <PasswordInput size="medium" appearance="standard" inputProps={{ value: valueObj, name: "password", onChange: onChangeValueObj, placeholder: "비밀번호 입력" }} resetFunc={resetValueObj} style={{ width: 375 }} onKeyUp={null} />
+          </div>
+          <div className={styles.button_area}>
+            <Buttons color="primary" size="large" text="로그인" style={{ width: 375 }} onClick={onClickLoginReqeust} />
+            <div>
+              <span>비밀번호가 기억나지 않으세요?</span>
+              <Link href={`/auth/password`}>
+                <Buttons size="xsmall" color="subtle" text="비밀번호 찾기" style={{ width: 100 }} />
+              </Link>
+            </div>
+          </div>
+        </div>
+        <div className={styles.join}>
+          <span>
+            인디션으로 물류사 검색의 <p>종착</p>을 경험해보세요
+          </span>
+          <Link href={`/auth/join`}>
+            <Buttons size="large" color="default" text="계정 생성" style={{ width: 375 }} />
+          </Link>
+        </div>
+      </div>
     </div>
   );
 }

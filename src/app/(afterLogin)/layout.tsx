@@ -4,26 +4,25 @@ import styles from "@/styles/layout.module.scss";
 import LayoutSidebar from "./_components/Sidebar";
 import { GetServerSideProps } from "next";
 import Header from "./_components/Header";
-import AppContext from "../ContextProvider";
+import useSidebarStore from "../store/sidebar";
 type Props = {
   children: ReactNode;
   modal: ReactNode;
 };
 
 export default function AfterLoginLayout({ children }: Props) {
-  const { sidebarState, setSidebarState } = useContext(AppContext);
-
-  useEffect(() => {
-    const savedState = localStorage.getItem("sidebarExpand");
-    if (savedState !== null) {
-      console.log(sidebarState.isExpand, "sidebarState", localStorage.getItem("sidebarExpand"));
-      setSidebarState({ ...sidebarState, isExpand: JSON.parse(savedState) });
-    }
-  }, []);
+  const { sidebarState, setSidebarState } = useSidebarStore();
+  // useEffect(() => {
+  //   const savedState = localStorage.getItem("sidebarExpand");
+  //   if (savedState !== null) {
+  //     setSidebarState("isExpand");
+  //   }
+  // }, []);
 
   const toggleSidebar = () => {
     const newState = !sidebarState.isExpand;
-    setSidebarState({ ...sidebarState, isExpand: newState });
+    setSidebarState("isExpand");
+    console.log(newState);
     localStorage.setItem("sidebarExpand", JSON.stringify(newState));
   };
   const [isSidebarTooltips, setIsSidebarTooltips] = useState(null);

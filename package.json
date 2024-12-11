@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "npx env-cmd -e local next dev -H 192.168.10.7 -p 3070",
+    "dev": "npx env-cmd -e local next dev -H 192.168.10.2 -p 3070",
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
@@ -22,7 +22,9 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-dropzone": "^14.3.5",
-    "sass": "^1.81.0"
+    "react-transition-group": "^4.4.5",
+    "sass": "^1.81.0",
+    "zustand": "^5.0.2"
   },
   "devDependencies": {
     "@types/node": "^20",

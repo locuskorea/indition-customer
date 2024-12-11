@@ -1,0 +1,61 @@
+@import "@/styles/variable.scss";
+.logo_header {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  column-gap: 10px;
+  > p {
+    @include heading_xsmall;
+  }
+}
+.description {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  row-gap: 8px;
+  > pre.title {
+    @include heading_large;
+    color: $default;
+  }
+
+  > pre.des {
+    @include body_medium;
+    color: $subtle;
+  }
+}
+.email_info {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  row-gap: 4px;
+  > span {
+    @include heading_xxsmall;
+    color: $default;
+  }
+  > p {
+    @include body_medium;
+    color: $subtle;
+  }
+}
+.re_code {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  row-gap: 8px;
+  > span {
+    @include body_medium;
+    font-weight: 600;
+    color: $subtle;
+  }
+  > p {
+    @include body_medium;
+    color: $subtle;
+  }
+}

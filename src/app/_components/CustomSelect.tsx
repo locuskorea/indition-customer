@@ -60,6 +60,7 @@ export default function CustomSelect({ options, selectStates, setSelectStates }:
       document.removeEventListener("mousedown", handleClickOutside);
     };
   }, []);
+  console.log(selectStates);
   return (
     <>
       {Object.keys(selectStates).map((id, idx) => (
@@ -75,24 +76,24 @@ export default function CustomSelect({ options, selectStates, setSelectStates }:
           {selectStates[id]?.isOpen && (
             <div className={styles.options}>
               {options?.map((el, idx) => (
-                <>
+                <div key={`select_${idx}`}>
                   {selectStates[id]?.type == "default" && (
-                    <div className={`${styles.rows} ${selectStates[id]?.selectedOption == el.id ? styles.selected : null}`} key={`options_${idx}`} onClick={() => handleOptionSelect(id, el.id)}>
+                    <div className={`${styles.rows} ${selectStates[id]?.selectedOption == el.id ? styles.selected : null}`} key={`default_${idx}`} onClick={() => handleOptionSelect(id, el.id)}>
                       <span>{el.label}</span>
                     </div>
                   )}
                   {selectStates[id]?.type == "checkbox" && (
-                    <div className={`${styles.rows} ${selectStates[id]?.selectedOption == el.id ? styles.selected : null}`} key={`options_${idx}`} onClick={() => handleOptionSelect(id, el.id)}>
+                    <div className={`${styles.rows} ${selectStates[id]?.selectedOption == el.id ? styles.selected : null}`} key={`checkbox_${idx}`} onClick={() => handleOptionSelect(id, el.id)}>
                       {/* <span>{el.label}</span> */}
                       <Checkbox text={el.label} size="medium" state="enable" properties={{ id: el.id.toString(), checked: selectStates[id]?.selectedOption == el.id }} onChange={() => handleOptionSelect(id, el.id)} />
                     </div>
                   )}
                   {selectStates[id]?.type == "radio" && (
-                    <div className={`${styles.rows} ${selectStates[id]?.selectedOption == el.id ? styles.selected : null}`} key={`options_${idx}`} onClick={() => handleOptionSelect(id, el.id)}>
+                    <div className={`${styles.rows} ${selectStates[id]?.selectedOption == el.id ? styles.selected : null}`} key={`radio_${idx}`} onClick={() => handleOptionSelect(id, el.id)}>
                       <RadioInput text={el.label} state="enable" properties={{ id: el.id.toString(), name: el.id.toString(), checked: selectStates[id]?.selectedOption == el.id }} onChange={() => handleOptionSelect(id, el.id)} />
                     </div>
                   )}
-                </>
+                </div>
               ))}
             </div>
           )}

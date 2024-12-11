@@ -9,7 +9,7 @@
   height: 40px;
   position: relative;
   margin: auto;
-  z-index: 1;
+  z-index: 10;
   cursor: pointer;
   > .label {
     width: 100%;
@@ -49,38 +49,48 @@
       width: 100%;
     }
   }
-  > .options {
+  .options {
     width: 100%;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
     justify-content: flex-start;
     position: absolute;
-    top: 50px;
+    top: 40px;
     left: 0;
     padding: 6px 0;
     box-shadow: 0px 8px 12px 0px #091e4226, 0px 0px 1px 0px #091e421a;
-    z-index: 2;
-    > .rows {
+    background-color: $white;
+    > div {
       width: 100%;
-      min-height: 36px;
-      height: 36px;
       display: flex;
-      flex-direction: row;
-      align-items: center;
+      flex-direction: column;
+      align-items: flex-start;
       justify-content: flex-start;
-      padding: 0 12px;
-      box-sizing: border-box;
-      cursor: pointer;
-      &:hover {
-        background-color: $btn_stop_hover;
-      }
-      &.selected {
-        border-left: 2px solid $border_focus;
-        background-color: $btn_dropdown;
-      }
-      > span {
-        @include body_medium;
+      .rows {
+        width: 100%;
+        min-height: 36px;
+        height: 36px;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: flex-start;
+        padding: 0 12px;
+        box-sizing: border-box;
+        background-color: $white;
+        z-index: 10;
+        cursor: pointer;
+        &:hover {
+          background-color: $btn_stop_hover;
+          z-index: 10;
+        }
+        &.selected {
+          border-left: 2px solid $border_focus;
+          background-color: $btn_dropdown;
+        }
+        > span {
+          @include body_medium;
+        }
       }
     }
   }

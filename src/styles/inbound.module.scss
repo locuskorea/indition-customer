@@ -1,0 +1,19 @@
+@import "./variable.scss";
+.inbound_page_layout {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  padding: 30px 20px 0 26px;
+  box-sizing: border-box;
+  .table_root {
+    width: 100%;
+    height: 100%;
+    border: 1px solid $border_neutral300A;
+  }
+}
+.inbound_apply_root {
+  @extend .inbound_page_layout;
+}

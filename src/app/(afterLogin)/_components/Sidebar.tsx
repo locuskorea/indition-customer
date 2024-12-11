@@ -6,6 +6,7 @@ import SideNavigation from "./SideNavigation";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import AppContext from "@/app/ContextProvider";
+import useSidebarStore from "@/app/store/sidebar";
 type Props = {
   toggleSidebar: (event?: React.MouseEvent<HTMLButtonElement>) => void;
   isSidebarTooltips?: string;
@@ -13,7 +14,7 @@ type Props = {
   onMouseoverTooltip: (e: React.MouseEvent<HTMLDivElement> | string) => void;
 };
 export default function LayoutSidebar({ toggleSidebar, isSidebarTooltips, setIsSidebarTooltips, onMouseoverTooltip }: Props) {
-  const { sidebarState, setSidebarState } = useContext(AppContext);
+  const { sidebarState, setSidebarState } = useSidebarStore();
   const path = usePathname();
   const sidebar = [
     {
@@ -27,11 +28,11 @@ export default function LayoutSidebar({ toggleSidebar, isSidebarTooltips, setIsS
     {
       type: "parent",
       label: "입고 관리",
-      id: "incoming",
-      icon: "/icons/sidebar_incoming.svg",
+      id: "inbound",
+      icon: "/icons/sidebar_inbound.svg",
       child: [
-        { label: "입고 신청", href: "/incoming/apply?status=&dateSearchType=&startDate=&endDate=&searchText=" },
-        { label: "입고 조회", href: "/incoming/list?pageNo=1&pageCnt=20&dateSearchType=&startDate=&endDate=" },
+        { label: "입고 신청", href: "/inbound/apply?status=&dateSearchType=&startDate=&endDate=&searchText=" },
+        { label: "입고 조회", href: "/inbound/list?pageNo=1&pageCnt=20&dateSearchType=&startDate=&endDate=" },
       ],
     },
     {
@@ -85,47 +86,46 @@ export default function LayoutSidebar({ toggleSidebar, isSidebarTooltips, setIsS
       href: `/store/setting?type=브랜드정보&brand=`,
     },
   ];
-  console.log(sidebarState, "sidebarState");
   const onClickSidebar = (kind) => {
     if (sidebarState.isExpand) {
       switch (kind) {
-        case "INCOMING": {
-          if (sidebarState.incomingSidebar) {
-            setSidebarState({ ...sidebarState, incomingSidebar: false });
+        case "INBOUND": {
+          if (sidebarState.inboundSidebar) {
+            setSidebarState("inboundSidebar");
           } else {
-            setSidebarState({ ...sidebarState, incomingSidebar: true });
+            setSidebarState("inboundSidebar");
           }
           break;
         }
         case "STOCK": {
           if (sidebarState.stockSidebar) {
-            setSidebarState({ ...sidebarState, stockSidebar: false });
+            setSidebarState("stockSidebar");
           } else {
-            setSidebarState({ ...sidebarState, stockSidebar: true });
+            setSidebarState("stockSidebar");
           }
           break;
         }
         case "OUTGOING": {
           if (sidebarState.outgoingSidebar) {
-            setSidebarState({ ...sidebarState, outgoingSidebar: false });
+            setSidebarState("outgoingSidebar");
           } else {
-            setSidebarState({ ...sidebarState, outgoingSidebar: true });
+            setSidebarState("outgoingSidebar");
           }
           break;
         }
         case "RETURN": {
           if (sidebarState.returnSidebar) {
-            setSidebarState({ ...sidebarState, returnSidebar: false });
+            setSidebarState("returnSidebar");
           } else {
-            setSidebarState({ ...sidebarState, returnSidebar: true });
+            setSidebarState("returnSidebar");
           }
           break;
         }
         case "ACCOUNT": {
           if (sidebarState.accountSidebar) {
-            setSidebarState({ ...sidebarState, accountSidebar: false });
+            setSidebarState("accountSidebar");
           } else {
-            setSidebarState({ ...sidebarState, accountSidebar: true });
+            setSidebarState("accountSidebar");
           }
           break;
         }
@@ -135,7 +135,7 @@ export default function LayoutSidebar({ toggleSidebar, isSidebarTooltips, setIsS
       }
     }
   };
-
+  console.log(sidebarState);
   return (
     <div className={`${styles.sidebar_root} ${sidebarState.isExpand ? styles.expand : styles.shrink}`}>
       <div className={styles.menu}>
@@ -166,7 +166,7 @@ export default function LayoutSidebar({ toggleSidebar, isSidebarTooltips, setIsS
                   onclick={() => onClickSidebar(el.id.toUpperCase())}
                   isExpandMenu={sidebarState[`${el.id}Sidebar`]}
                   sidebarData={sidebar}
-                  // mouseover={onMouseoverTooltip}
+                  mouseover={onMouseoverTooltip}
                   isExpand={sidebarState.isExpand}
                 />
                 <>
